@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import Scores from './components/scores/Scores'
 import './App.css';
+import Sort from './components/sort/Sort';
 
 const App = () => {
 
@@ -16,25 +17,8 @@ const App = () => {
       })
   }
 
-  function handleSortDesc() {
-    const sortedGames = [...games].sort((a,b) => {
-      return a.etm < b.etm ? 1 : -1;
-    })
-    setGames(sortedGames);
-  }
-
-  function handleSortAsc() {
-    const sortedGames = [...games].sort((a,b) => {
-      return a.etm > b.etm ? 1 : -1;
-    })
-    setGames(sortedGames);
-  }
-
-  function removeLosses() {
-    const losses = document.querySelectorAll('.indyloss');
-    for (const loss of losses) {
-      loss.style.display = 'none';
-    }
+  const sortGames = games => {
+    setGames(games)
   }
 
   useEffect(() => {
@@ -43,11 +27,7 @@ const App = () => {
 
   return (
     <div>
-      <div className="sortButtons">
-        <button onClick={handleSortDesc}>Sort in descending order</button>
-        <button onClick={handleSortAsc}>Sort in ascending order</button>
-        <button onClick={removeLosses}>Remove Losses</button>
-      </div>
+      <Sort games={games} sortGames={sortGames} />
       <Scores games={games} />
     </div>
   );
