@@ -6,19 +6,24 @@ import Sort from './components/sort/Sort';
 const App = () => {
 
   const [games, setGames] = useState([]);
+  const [loading, setLoading] = useState(false);
 
-  const fetchGames = () => {
-    fetch("https://data.nba.net/data/10s/v2015/json/mobile_teams/nba/2021/teams/pacers_schedule.json")
+  const fetchGames = async () => {
+    setLoading(true);
+    await fetch("https://data.nba.net/data/10s/v2015/json/mobile_teams/nba/2021/teams/pacers_schedule.json")
       .then(response => {
         return response.json()
       })
       .then(data => {
         setGames(data.gscd.g)
       })
+    setLoading(false);
   }
 
   const sortGames = games => {
-    setGames(games)
+    setLoading(true);
+    setGames(games);
+    setLoading(false);
   }
 
   useEffect(() => {
@@ -28,7 +33,7 @@ const App = () => {
   return (
     <div>
       <Sort games={games} sortGames={sortGames} />
-      <Scores games={games} />
+      <Scores loading={loading} games={games} />
     </div>
   );
 }
