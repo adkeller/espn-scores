@@ -22,6 +22,16 @@ strong {
   border-top: 1px solid #efefef;
   border-left: 1px solid #efefef;
 }
+@media only screen and (max-width: 600px) {
+  .gameGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+@media only screen and (max-width: 425px) {
+  .gameGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
 .game {
   font-family: 'Roboto', sans-serif;
   font-size: 12px;
