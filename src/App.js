@@ -29,9 +29,9 @@ const App = () => {
     setLoading(false);
   }
 
-  const getGame = gameid => {
+  const getGame = async gameid => {
     setLoading(true);
-    fetch(`https://data.nba.net/data/10s/v2015/json/mobile_teams/nba/2021/scores/gamedetail/${gameid}_gamedetail.json`)
+    await fetch(`https://data.nba.net/data/10s/v2015/json/mobile_teams/nba/2021/scores/gamedetail/${gameid}_gamedetail.json`)
       .then(response => {
         return response.json()
       })
@@ -61,5 +61,40 @@ const App = () => {
     </Router>
   );
 }
+
+
+// class App extends Component {
+//   state = {
+//     games: [],
+//     loading: false
+//   }
+
+//   async componentDidMount() {
+//     this.setState({ loading: true });
+//     await fetch("https://data.nba.net/data/10s/v2015/json/mobile_teams/nba/2021/teams/pacers_schedule.json")
+//       .then(response => {
+//         return response.json()
+//       })
+//       .then(data => {
+//         this.setState({ games: data.gscd.g })
+//       })
+//     this.setState({ loading: false })
+//   }
+
+//   sortGames = games => {
+//     this.setState({ loading: true });
+//     this.setState({ games: games });
+//     this.setState({ loading: false })
+//   }
+
+//   render() {
+//     return (
+//       <Fragment>
+//         <Sort games={this.state.games} sortGames={this.sortGames} />
+//         <Scores loading={this.state.loading} games={this.state.games} />
+//       </Fragment>
+//     );
+//   }
+// }
 
 export default App;
