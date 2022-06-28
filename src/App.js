@@ -23,19 +23,15 @@ const App = () => {
     setLoading(false);
   }
 
-  useEffect(() => {
-    fetchGames()
-  }, [])
-
   const sortGames = games => {
     setLoading(true);
     setGames(games);
     setLoading(false);
   }
 
-  const getGame = async gameid => {
+  const getGame = gameid => {
     setLoading(true);
-    await fetch(`https://data.nba.net/data/10s/v2015/json/mobile_teams/nba/2021/scores/gamedetail/${gameid}_gamedetail.json`)
+    fetch(`https://data.nba.net/data/10s/v2015/json/mobile_teams/nba/2021/scores/gamedetail/${gameid}_gamedetail.json`)
       .then(response => {
         return response.json()
       })
@@ -44,6 +40,10 @@ const App = () => {
       })
     setLoading(false);
   }
+
+  useEffect(() => {
+    fetchGames()
+  }, [])
 
   return (
     <Router>
