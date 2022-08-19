@@ -18,7 +18,10 @@ const App = () => {
         return response.json()
       })
       .then(data => {
-        setGames(data.gscd.g)
+        const sortedGames = [...data.gscd.g].sort((a,b) => {
+          return a.etm < b.etm ? 1 : -1;
+        })
+        setGames(sortedGames)
       })
     setLoading(false);
   }
